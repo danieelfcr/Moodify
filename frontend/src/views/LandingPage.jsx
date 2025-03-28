@@ -5,7 +5,6 @@ export const LandingPage = () => {
   return (
     <>
         <Header />
-        <div>LandingPage</div>
     </>
   )
 }
