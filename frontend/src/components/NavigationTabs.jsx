@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./NavigationTabs.css";
+import { Analyze } from "./Analyze";
 
 export const NavigationTabs = () => {
   const [selected, setSelected] = useState("analyze");
@@ -27,7 +28,7 @@ export const NavigationTabs = () => {
         </button>
       </div>
       <div className="content-container">
-        {selected === "analyze" && <div>Component</div>}
+        {selected === "analyze" && <div><Analyze/></div>}
         {selected === "history" && <div>Component</div>}
         {selected === "statistics" && <div>Component</div>}
       </div>
