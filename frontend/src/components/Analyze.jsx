@@ -30,13 +30,13 @@ export const Analyze = () => {
     if (file) {
       //Verify size file 5MB
       if (file.size > 5 * 1024 * 1024) {
-        alert("El archivo es demasiado grande. El tamaño máximo es 5MB.")
+        alert("File is too big. Max file is 5MB.")
         return
       }
 
       //Verify file type
       if (!file.type.match("image/jpeg") && !file.type.match("image/png")) {
-        alert("Solo se permiten archivos JPG o PNG.")
+        alert("We only accepts JPG or PNG files.")
         return
       }
 
@@ -62,8 +62,15 @@ export const Analyze = () => {
       
 
       <div className="photo-section">
-        <h2>Upload a photo</h2>
-        <p>Upload an existing photo to analyze it</p>
+        <div className="photo-text-section">
+            <div className="text-container">
+                <h2>Upload a photo</h2>
+                <p>Upload an existing photo to analyze it</p>
+            </div>
+            <div className="btn-container">
+                <button id="analyze-btn">Analyze</button>
+            </div>
+        </div>
         
         {/*Add class with-preview if previewUrl has some value*/}
         <div

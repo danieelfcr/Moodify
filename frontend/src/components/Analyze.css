@@ -3,7 +3,7 @@
     flex-direction: row;
     gap: 20px;
     width: 100%;
-    max-width: 1200px;
+    max-width: 80%;
     margin: 0 auto;
   }
   
@@ -30,6 +30,32 @@
     color: #666;
     font-size: 16px;
     margin-bottom: 24px;
+  }
+
+  .photo-text-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  #analyze-btn {
+    background-color: #b673fd;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  #analyze-btn:hover {
+    background-color: #7E22CE;
+    transform: scale(1.1);
   }
   
   .upload-area {
