@@ -1,0 +1,31 @@
+.tabs-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  
+  .tab-button {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 10px;
+    font-weight: normal;
+    color: gray;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s, font-weight 0.3s;
+    border-radius: 10px;
+  }
+  
+  .tab-button.active {
+    background-color: #f3e8ff;
+    color: purple;
+    font-weight: bold;
+  }
+  
+  .content-container {
+    margin-top: 10px;
+  }
+  
