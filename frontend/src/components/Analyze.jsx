@@ -1,50 +1,14 @@
 
 import { useState, useRef } from "react"
 import "./Analyze.css"
-import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 
 export const Analyze = () => {
-  const [cameraActive, setCameraActive] = useState(false)
+
   const [selectedFile, setSelectedFile] = useState(null)
   const [previewUrl, setPreviewUrl] = useState(null)
-  const videoRef = useRef(null)
+
   const fileInputRef = useRef(null)
-  const streamRef = useRef(null)
-
-  //**************CAMERA USAGE******************* */
-  const handleStartCamera = async () => {
-    try {
-      //Stop previous streams
-      if (streamRef.current) {
-        streamRef.current.getTracks().forEach((track) => track.stop())
-      }
-
-      //We can try to obtain access to camera
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: true,
-        audio: false,
-      })
-
-      streamRef.current = stream //Save stream
-
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream //Assign stream to element videoRef
-        setCameraActive(true) //Activate state
-      }
-    } catch (error) {
-      console.error("Error al acceder a la cámara:", error)
-      alert("No se pudo acceder a la cámara. Por favor, verifica los permisos.")
-    }
-  }
-
-  const handleStopCamera = () => {
-    if (streamRef.current) {
-      streamRef.current.getTracks().forEach((track) => track.stop()) //Stop stream
-      streamRef.current = null
-      setCameraActive(false)
-    }
-  }
 
   //**************FILE USAGE******************* */
   const handleFileChange = (event) => {
@@ -95,24 +59,7 @@ export const Analyze = () => {
 
   return (
     <div className="photo-upload-container">
-      <div className="photo-section">
-        <h2>Take a photo</h2>
-        <p>Use your camera to capture your facial expression.</p>
-
-        {cameraActive ? (
-          <div className="camera-container">
-            <video ref={videoRef} autoPlay playsInline className="camera-preview" />
-            <button className="camera-button stop" onClick={handleStopCamera}> {/*If camera is active, show button to stop it*/}
-              Stop camera
-            </button>
-          </div>
-        ) : (
-          <button className="camera-button" onClick={handleStartCamera}>
-            <CameraAltIcon size={20} /> {/*If camera is not active, show button to activate it*/}
-            Iniciar cámara
-          </button>
-        )}
-      </div>
+      
 
       <div className="photo-section">
         <h2>Upload a photo</h2>

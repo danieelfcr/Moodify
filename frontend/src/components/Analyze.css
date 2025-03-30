@@ -20,7 +20,7 @@
   .photo-section h2 {
     margin: 0;
     font-size: 24px;
-    color: #9333ea; /* Color morado similar al botón */
+    color: #7E22CE;
     font-weight: 600;
     margin-bottom: 8px;
   }
@@ -30,46 +30,6 @@
     color: #666;
     font-size: 16px;
     margin-bottom: 24px;
-  }
-  
-  .camera-button {
-    background-color: #9333ea;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 14px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: background-color 0.2s;
-  }
-  
-  .camera-button:hover {
-    background-color: #7e22ce;
-  }
-  
-  .camera-button.stop {
-    background-color: #ef4444;
-  }
-  
-  .camera-button.stop:hover {
-    background-color: #dc2626;
-  }
-  
-  .camera-container {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  
-  .camera-preview {
-    width: 100%;
-    border-radius: 8px;
-    background-color: #f4f4f5;
-    aspect-ratio: 16 / 9;
   }
   
   .upload-area {
@@ -87,7 +47,7 @@
   }
   
   .upload-area:hover {
-    border-color: #9333ea;
+    border-color: #7E22CE;
   }
   
   .upload-area.with-preview {
@@ -96,7 +56,7 @@
   }
   
   .upload-icon {
-    color: #9333ea;
+    color: #7E22CE;
     margin-bottom: 16px;
   }
   
