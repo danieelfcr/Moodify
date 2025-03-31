@@ -11,7 +11,7 @@ export const Analyze = () => {
   const [previewUrl, setPreviewUrl] = useState(null)
   const [showModal, setShowModal] = useState(false)
   //Just for now..
-  const emotion = "Peruano"
+  const emotion = "Neutral"
   const songs = ["Someone Like You - Adele", "Fix You - Coldplay", "Hurt - Johnny Cash"]
   ///
   const fileInputRef = useRef(null)
