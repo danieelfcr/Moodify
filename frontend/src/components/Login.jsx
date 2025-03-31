@@ -74,7 +74,7 @@ export const Login = () => {
                 <button className='btn-account-login' type="submit">Enviar</button>
                 <div>
                 <label className='lbl-si-login'>¿No tienes una cuenta?  </label>  
-                <button className='btn-si-login'>Registrate</button>         
+                <button className='btn-si-login' onClick={() => navigate('/signup')}>Registrate</button>         
                 </div>
         </div>
       </form>

@@ -38,7 +38,7 @@ export const CreateAccount = () => {
 
       if (!cpassword) {
         newErrors.cpassword = "Confirm Password is mandatory.";
-      } else if (password != cpassword) {
+      } else if (password !== cpassword) {
         newErrors.cpassword = "Different password";
       }
   
@@ -57,6 +57,8 @@ export const CreateAccount = () => {
             cpassword: cpassword.trim(),
           };
           console.log(JSON.stringify(response, null, 2));
+          alert("Account created successfully. You can now log in!");
+          navigate('/login');
         }
       };
 
@@ -90,14 +92,14 @@ export const CreateAccount = () => {
                 {errors.password && <p className="error">{errors.password}</p>} {/*If there is an error, show it*/}
 
                 <label className='lbl-cpassword-ca'>Confirm password: </label>
-                <input className='inpt-cpassword-ca' type="password" placeholder="Cpassword" value={cpassword} 
+                <input className='inpt-cpassword-ca' type="password" placeholder="Confirm password" value={cpassword} 
                 onChange={(e) => setCpassword(e.target.value)}/>
                 {errors.cpassword && <p className="error">{errors.cpassword}</p>} {/*If there is an error, show it*/}
 
                 <button className='btn-account-login' type="submit">Enviar</button>
                 <div>
                 <label className='lbl-si-ca'>¿Ya tienes una cuenta?  </label>  
-                <button className='btn-si-ca' type="submit">Iniciar sesión</button>         
+                <button className='btn-si-ca' type="submit" onClick={() => navigate('/login')}>Iniciar sesión</button>         
                 </div>
         </div>
       </form>
