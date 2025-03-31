@@ -13,7 +13,7 @@ export const NavigationTabs = () => {
           className={`tab-button ${selected === "analyze" ? "active" : ""}`}
           onClick={() => setSelected("analyze")}
         >
-          Analize emotion
+          Analyze emotion
         </button>
         <button
           className={`tab-button ${selected === "history" ? "active" : ""}`}
