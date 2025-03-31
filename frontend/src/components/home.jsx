@@ -5,7 +5,7 @@ import logoCamera from '../assets/Camera.png'
 import logoEmotion from '../assets/Emotion.png'
 import logoNote from '../assets/note.png'
 
-export const Home = () => { // "Home" con mayúscula
+export const Home = () => { 
   return (
     <>
     <div className='text-direction-home'>
