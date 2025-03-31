@@ -1,12 +1,70 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './CreateAccount.css'
-import { Form } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+
 
 export const CreateAccount = () => {
+
+    const navigate = useNavigate();
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState(''); //Hooks to manage values
+    const [password, setPassword] = useState('');
+    const [cpassword, setCpassword] = useState('');
+    const [errors, setErrors] = useState({}); //Hook to manage errors
+  
+    //Form validations
+    const validateForm = () => {
+      const newErrors = {};
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const nameRegex = /^[A-Za-z\s]+$/;
+  
+      if (!name) {
+        newErrors.name = "Name is mandatory.";
+      } else if (!nameRegex.test(name)) {
+        newErrors.name = "Name is not in a valid format.";
+      }
+
+      if (!email) {
+        newErrors.email = "Email is mandatory.";
+      } else if (!emailRegex.test(email)) {
+        newErrors.email = "Email is not in a valid format.";
+      }
+  
+      if (!password) {
+        newErrors.password = "Password is mandatory.";
+      } else if (password.length < 8) {
+        newErrors.password = "Password most have, at least, 8 characters.";
+      }
+
+      if (!cpassword) {
+        newErrors.cpassword = "Confirm Password is mandatory.";
+      } else if (password != cpassword) {
+        newErrors.cpassword = "Different password";
+      }
+  
+      setErrors(newErrors);
+      return Object.keys(newErrors).length === 0;
+    };
+  
+    //Manage submit
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      if (validateForm()) {
+        const response = {
+            name: name.trim(),
+            email: email.trim(),
+            password:password.trim(),
+            cpassword: cpassword.trim(),
+          };
+          console.log(JSON.stringify(response, null, 2));
+        }
+      };
+
+
   return (
     <>
     <div className='forms-ca'>
-      <form>
+    <form onSubmit={handleSubmit}>
         <div className='text-ca'>
             <div className='h1-ca'>
                 <h1>Sign Up</h1>
@@ -17,16 +75,24 @@ export const CreateAccount = () => {
         </div>
         <div className='forms-items-ca'>     
                 <label className='lbl-name-ca'>Name: </label>
-                <input className='inpt-name-ca' type="text" placeholder="Name"/> 
+                <input className='inpt-name-ca' type="text" placeholder="Name" value={name} 
+                onChange={(e) => setName(e.target.value)}/> 
+                {errors.name && <p className="error">{errors.name}</p>} {/*If there is an error, show it*/}
 
                 <label className='lbl-account-login'>Email Account: </label>
-                <input className='inpt-account-login' type="text" placeholder="Email"/>
+                <input className='inpt-account-login' type="text" placeholder="Email" value={email} 
+                onChange={(e) => setEmail(e.target.value)}/>
+                {errors.email && <p className="error">{errors.email}</p>} {/*If there is an error, show it*/}
 
                 <label className='lbl-password-ca'>Password: </label>
-                <input className='inpt-password-ca' type="password" placeholder="Password"/>
+                <input className='inpt-password-ca' type="password" placeholder="Password" value={password} 
+                onChange={(e) => setPassword(e.target.value)}/>
+                {errors.password && <p className="error">{errors.password}</p>} {/*If there is an error, show it*/}
 
                 <label className='lbl-cpassword-ca'>Confirm password: </label>
-                <input className='inpt-cpassword-ca' type="password" placeholder="Password"/>
+                <input className='inpt-cpassword-ca' type="password" placeholder="Cpassword" value={cpassword} 
+                onChange={(e) => setCpassword(e.target.value)}/>
+                {errors.cpassword && <p className="error">{errors.cpassword}</p>} {/*If there is an error, show it*/}
 
                 <button className='btn-account-login' type="submit">Enviar</button>
                 <div>
