@@ -1,13 +1,19 @@
 
 import { useState, useRef } from "react"
+import { EmotionModal } from "./EmotionModal";
 import "./Analyze.css"
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 
 export const Analyze = () => {
 
   const [selectedFile, setSelectedFile] = useState(null)
+  const [image, setImage] = useState(null)
   const [previewUrl, setPreviewUrl] = useState(null)
-
+  const [showModal, setShowModal] = useState(false)
+  //Just for now..
+  const emotion = "Peruano"
+  const songs = ["Someone Like You - Adele", "Fix You - Coldplay", "Hurt - Johnny Cash"]
+  ///
   const fileInputRef = useRef(null)
 
   //**************FILE USAGE******************* */
@@ -45,6 +51,7 @@ export const Analyze = () => {
       //Create URL for previsualization
       const fileUrl = URL.createObjectURL(file)
       setPreviewUrl(fileUrl)
+      setImage(fileUrl)
     }
   }
 
@@ -57,10 +64,24 @@ export const Analyze = () => {
     fileInputRef.current.click()
   }
 
+  //Analyze emotion modal
+  const analyzeEmotion = () => {
+    if (!previewUrl) {
+      alert("Upload an image first...")
+      return
+    }
+
+    // Simulación de análisis de emoción
+    
+    setShowModal(true)
+  }
+
+  const closeModal = () => {
+    setShowModal(false)
+  }
+
   return (
     <div className="photo-upload-container">
-      
-
       <div className="photo-section">
         <div className="photo-text-section">
             <div className="text-container">
@@ -68,7 +89,7 @@ export const Analyze = () => {
                 <p>Upload an existing photo to analyze it</p>
             </div>
             <div className="btn-container">
-                <button id="analyze-btn" disabled={!selectedFile}>Analyze</button>
+                <button id="analyze-btn" disabled={!selectedFile} onClick={analyzeEmotion}>Analyze</button>
             </div>
         </div>
         
@@ -99,6 +120,8 @@ export const Analyze = () => {
           />
         </div>
       </div>
+      {/*Modal Comp.*/}
+      <EmotionModal isOpen={showModal} onClose={closeModal} image={image} emotion={emotion} songs={songs} />
     </div>
   )
 }

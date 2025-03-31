@@ -5,4 +5,5 @@ export { Home } from './home'
 export { History } from './History'
 export { Login } from './Login'
 export {CreateAccount} from './CreateAccount'
+export { EmotionModal } from './EmotionModal'
 
