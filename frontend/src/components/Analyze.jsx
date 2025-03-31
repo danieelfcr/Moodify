@@ -68,7 +68,7 @@ export const Analyze = () => {
                 <p>Upload an existing photo to analyze it</p>
             </div>
             <div className="btn-container">
-                <button id="analyze-btn">Analyze</button>
+                <button id="analyze-btn" disabled={!selectedFile}>Analyze</button>
             </div>
         </div>
         
