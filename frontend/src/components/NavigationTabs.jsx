@@ -31,7 +31,7 @@ export const NavigationTabs = () => {
       <div className="content-container">
         {selected === "analyze" && <div><Analyze/></div>}
         {selected === "history" && <div><History/></div>}
-        {selected === "statistics" && <div>Component</div>}
+        {selected === "statistics" && <div>Coming soon...</div>}
       </div>
     </>
   );
