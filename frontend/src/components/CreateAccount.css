@@ -1,13 +1,13 @@
 .forms-ca{
     text-align: center;
-    margin-top: 150px;
+    margin-top: 1%;
     width: fit-content; /* Ajusta el ancho al contenido */
     margin-left: auto; /* Centra horizontalmente */
     margin-right: auto; /* Centra horizontalmente */
     padding: 20px; /* Agrega relleno interno */
     border-radius: 10px;
     background-color: rgb(244, 240, 245);
-    margin-bottom: 100px;
+    margin-bottom: 5%;
   }
   
   .h1-ca{
