@@ -1,12 +1,12 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const users = require('../models/userModel');
+const User = require('../database/models/User');
 require('dotenv').config();
 
-exports.login = (req, res) => {
+exports.login = async (req, res) => {
     const { email, password } = req.body;
 
-    const user = users.find(u => u.email === email);
+    const user = await User.findOne({where: { email }});
     if (!user) return res.status(404).json({message: 'User not found'});
 
     const isPasswordValid = bcrypt.compareSync(password, user.password);
