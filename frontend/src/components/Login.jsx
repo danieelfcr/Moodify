@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './Login.css'
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -30,10 +31,33 @@ export const Login = () => {
   };
 
   //Manage submit
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      navigate('/dashboard'); //If everything is correct (:D), go to /dashboard
+      const user = {
+        email: email.trim(),
+        password: password.trim()
+      };
+
+      try {
+        const res = await axios.post('http://localhost:3001/auth/login', user);
+        console.log(res);
+        //Save token in local storage
+        sessionStorage.setItem('token', res.data.token);
+        navigate('/dashboard'); //If everything is correct (:D), go to /dashboard
+      } catch (error) {
+        if (error.response && error.response.status === 404) {
+          alert("The user doesn't exist.");
+        }
+        else if (error.response && error.response.status === 401) {
+          alert("Password is incorrect.")
+        }
+        else {
+          console.error('Error logging in:', error);
+          alert('An error occurred logging in.')
+        }
+      }
+      
     }
   };
 
