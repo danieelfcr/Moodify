@@ -3,6 +3,7 @@ import { useState, useRef } from "react"
 import { EmotionModal } from "./EmotionModal";
 import "./Analyze.css"
 import FileUploadIcon from '@mui/icons-material/FileUpload';
+import axios from "axios";
 
 export const Analyze = () => {
 
@@ -11,7 +12,7 @@ export const Analyze = () => {
   const [previewUrl, setPreviewUrl] = useState(null)
   const [showModal, setShowModal] = useState(false)
   //Just for now..
-  const emotion = "Neutral"
+  const [emotion, setEmotion] = useState(null);
   const songs = ["Someone Like You - Adele", "Fix You - Coldplay", "Hurt - Johnny Cash"]
   ///
   const fileInputRef = useRef(null)
@@ -65,15 +66,44 @@ export const Analyze = () => {
   }
 
   //Analyze emotion modal
-  const analyzeEmotion = () => {
-    if (!previewUrl) {
+  const analyzeEmotion = async () => {
+    if (!selectedFile) {
       alert("Upload an image first...")
       return
     }
 
-    // Simulación de análisis de emoción
-    
-    setShowModal(true)
+    //Encode file to base64
+    const reader = new FileReader();
+
+    //"Promise"
+    reader.onload = async () => {
+      const base64Image = reader.result;
+      console.log(base64Image);
+      try {
+        const res = await axios.post(
+          'http://localhost:3001/emotion/detect-emotion',
+          { image_base64: base64Image },
+          {
+            headers: {
+              Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+            },
+          }
+        );
+  
+        console.log(res.data);
+        setEmotion(res.data.emotion);
+        setShowModal(true);
+      } catch (error) {
+        if (error.response && error.response.status === 404) {
+          alert("Image doesn't contain any faces.");
+        }
+        else {
+          console.error("Error analyzing emotion:", error);
+          alert("There was an error analyzing the emotion.");
+        }
+      }
+    };
+    reader.readAsDataURL(selectedFile); //Convert image to a base64 string
   }
 
   const closeModal = () => {
