@@ -48,7 +48,7 @@ export const CreateAccount = () => {
     };
   
     //Manage submit
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
       e.preventDefault();
       if (validateForm()) {
           const newUser = {
@@ -58,13 +58,17 @@ export const CreateAccount = () => {
           };
 
           try {
-            const res = axios.post('http://localhost:3001/users/create-user', newUser);
+            const res = await axios.post('http://localhost:3001/users/create-user', newUser);
             console.log(res);
             alert("Account created successfully. You can now log in!");
             navigate('/login');
           } catch (error) {
-            console.error('Error creating user:', error)
-            alert("An error occurred while creating user. Please try again.");
+            if (error.response && error.response.status === 409) {
+              alert("The email is already in use. Please try a different one.");
+            } else {
+              console.error('Error creating user:', error);
+              alert("An error occurred while creating the user. Please try again.");
+            }
           } 
         }
     };

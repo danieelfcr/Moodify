@@ -13,6 +13,9 @@ exports.postUser = async (req, res) => {
         };
         res.status(201).json(userToReturn);
     } catch (error) {
+        if (error.name === 'SequelizeUniqueConstraintError') {
+            return res.status(409).json({ error: 'Email already exists' });
+        }
         res.status(500).json({error: error});
     }
 }
