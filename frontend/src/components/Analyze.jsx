@@ -3,6 +3,7 @@ import { useState, useRef } from "react"
 import { EmotionModal } from "./EmotionModal";
 import "./Analyze.css"
 import FileUploadIcon from '@mui/icons-material/FileUpload';
+import axios from "axios";
 
 export const Analyze = () => {
 
@@ -65,15 +66,37 @@ export const Analyze = () => {
   }
 
   //Analyze emotion modal
-  const analyzeEmotion = () => {
-    if (!previewUrl) {
+  const analyzeEmotion = async () => {
+    if (!selectedFile) {
       alert("Upload an image first...")
       return
     }
 
-    // Simulación de análisis de emoción
-    
-    setShowModal(true)
+    //Encode file to base64
+    const reader = new FileReader();
+
+    reader.onload = async () => {
+      const base64Image = reader.result;
+      console.log(base64Image);
+      try {
+        const response = await axios.post(
+          'http://localhost:3001/emotion/detect-emotion',
+          { image_base64: base64Image },
+          {
+            headers: {
+              Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+            },
+          }
+        );
+  
+        console.log(response.data);
+        setShowModal(true);
+      } catch (error) {
+        console.error("Error analyzing emotion:", error);
+        alert("There was an error analyzing the emotion.");
+      }
+    };
+    reader.readAsDataURL(selectedFile);
   }
 
   const closeModal = () => {
