@@ -10,6 +10,7 @@ var emotionRouter = require('./routes/emotion');
 var authRouter = require('./routes/auth');
 
 var app = express();
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
