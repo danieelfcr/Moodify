@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './CreateAccount.css'
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 
 export const CreateAccount = () => {
@@ -50,17 +51,23 @@ export const CreateAccount = () => {
     const handleSubmit = (e) => {
       e.preventDefault();
       if (validateForm()) {
-        const response = {
+          const newUser = {
             name: name.trim(),
             email: email.trim(),
-            password:password.trim(),
-            cpassword: cpassword.trim(),
+            password: password.trim(),
           };
-          console.log(JSON.stringify(response, null, 2));
-          alert("Account created successfully. You can now log in!");
-          navigate('/login');
+
+          try {
+            const res = axios.post('http://localhost:3001/users/create-user', newUser);
+            console.log(res);
+            alert("Account created successfully. You can now log in!");
+            navigate('/login');
+          } catch (error) {
+            console.error('Error creating user:', error)
+            alert("An error occurred while creating user. Please try again.");
+          } 
         }
-      };
+    };
 
 
   return (
